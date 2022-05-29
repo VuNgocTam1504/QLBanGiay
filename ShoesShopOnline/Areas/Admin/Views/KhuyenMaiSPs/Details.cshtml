@@ -1,0 +1,49 @@
+﻿@model ShoesShopOnline.Models.KhuyenMaiSP
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    p a:nth-child(2){
+        background:#137eff;
+        color:#fff;
+        border-radius:10px;
+        padding:6px 10px;
+    }
+</style>
+<h2>Chi tiết khuyến mại</h2>
+
+<div>
+    
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PhanTramKM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhanTramKM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayBatDau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayBatDau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayKetThuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayKetThuc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a>@Html.ActionLink("Sửa", "Edit", new { id = Model.MaKM }) <br /><br /></a>
+    @Html.ActionLink("Back to List", "Index")
+</p>

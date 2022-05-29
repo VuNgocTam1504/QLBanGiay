@@ -1,0 +1,230 @@
+﻿@model ShoesShopOnline.Models.ProductDetail
+
+@{
+    string name = ViewBag.filePath;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    string image = "";
+    if (ViewBag.filePath != null) {
+        string[] images = ViewBag.filePath.Split(';');
+        for (int i = 0; i < images.Length; i++)
+        {
+            image += "<div class=\"row\"><img class=\"img-rounded output\" name=\"uploadFile[" + i + "]\" alt=\"Ảnh\" width=\"100\" height=\"230\" src=\"/wwwroot/Images/" + images[i] + "\"><br/><a href=\"#\" class=\"btnRemove\">Xóa</a></div>";
+        }
+    }
+    
+    else
+    {
+        image = "";
+    }
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+    <style>
+        .row {
+            width: 25%;
+            float: left;
+            padding: 10px 20px;
+        }
+
+        a[class="btnAddNew"] {
+            color: white;
+            background-color: navy;
+            padding: 10px;
+            border: none;
+            width: 300px;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 20px;
+            height: 50px;
+            line-height: 50px;
+        }
+
+        a[class="btnRemove"] {
+            height: 30px;
+            line-height: 30px;
+            color: white;
+            background-color: red;
+            border: none;
+            width: 60px;
+            border-radius: 5px;
+            margin: 15px 10px;
+            text-align: center;
+        }
+
+        a[class="btnRemoveNew"] {
+            height: 30px;
+            line-height: 30px;
+            color: white;
+            background-color: red;
+            border: none;
+            width: 60px;
+            border-radius: 5px;
+            margin: 15px 10px;
+            text-align: center;
+        }
+
+        img {
+            padding: 10px 20px;
+        }
+    </style>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var max_fields = 10; //maximum input boxes allowed
+            var wrapper = $(".myinput"); //Fields wrapper
+            var add_button = $(".btnAddNew"); //Add button ID
+
+
+            var t = 0;
+            var indexmoi = 0;
+            var indexcu = 100;
+            var x = 0; //initlal text box count
+            $(add_button).click(function (e) { //on add input button click
+                e.preventDefault();
+                if (x < max_fields) { //max input box allowed
+                    x++; //text box increment
+                    $(wrapper).append('<div class="row"> <img class="img-rounded output" alt="Ảnh" width="100" height="230" src="~/wwwroot/Images/h0.png" />  <input type="file" name="uploadFile" onchange="loadFile(event)"/><a href="#" class="btnRemoveNew">Xóa</a></div>'); //add input box
+
+                }
+            });
+
+            $(wrapper).on("click", ".btnRemove", function (e) { //user click on remove text
+                value = $(this).parent().parent().prev().children(':first-child').val();
+                if (value != "") {
+                    name = $(this).prev().prev().attr("name");
+                    indexmoi = name.match(/[0-9]+/)[0];
+                    if (indexmoi > indexcu) {
+                        t++;
+                        indexmoi = indexmoi - t;
+                    }
+                    indexcu = indexmoi;
+
+
+                    var list = value.split(';');
+                    list.splice(indexmoi, 1);
+                    var result = "";
+                    for (let i = 0; i < list.length; i++) {
+                        result += list[i] + ";";
+                    }
+                    result = result.substring(0, result.length - 1);
+                    $(this).parent().parent().prev().children(':first-child').val(result);
+                }
+
+                e.preventDefault(); $(this).parent('div').remove(); x--;
+
+            })
+            //Remove Image New
+            $(wrapper).on("click", ".btnRemoveNew", function (e) { //user click on remove text
+                e.preventDefault(); $(this).parent('div').remove(); x--;
+            })
+        });
+    </script>
+    @section Ckeditor{
+        <script>
+            CKEDITOR.replace("MoTa");
+        </script>
+    }
+</head>
+<body>
+    @if (ViewBag.Error != null)
+    {
+        <br />
+        <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+    }
+    @using (Html.BeginForm("Edit", "SanPhams", FormMethod.Post, new { enctype = "multipart/form-data", MaSP=Model.MaSP }))
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Cập nhật thông tin sản phẩm</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenSP, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenSP, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenSP, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MaDM, "MaDM", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("MaDM", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MaDM, "", new { @class = "text-danger" })
+        </div>
+    </div>r
+    <div class=" form-group">
+        <label>Ảnh sản phẩm </label><br />
+        <a class="btnAddNew ThemMoi" href="#">Thêm Ảnh</a>
+        <br />
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Anh, new { htmlAttributes = new { @class = "form-control", style = "visibility:hidden;" } })
+            @Html.ValidationMessageFor(model => model.Anh, "", new { @class = "text-danger" })
+        </div>
+        <div id="myinput" class="myinput">
+            @Html.Raw(System.Web.HttpUtility.HtmlDecode(image))
+        </div>
+        <br />
+    </div>
+    <div class="form-group" style="clear:both">
+        @Html.LabelFor(model => model.Size, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Size, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MoTa, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control", rows = 50 } })
+            @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GiaBan, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.GiaBan, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.GiaBan, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        Mã khuyến mại
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MaKH, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MaKH, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <hr />
+            <input class="btn ThemMoi" style="margin-right:20px" type="submit" value="Lưu" />
+            <a class="btn ThemMoi" href="~/Admin/SanPhams/Index">Hủy</a>
+        </div>
+    </div>
+</div>
+    }
+
+    <script>
+        var loadFile = function (event) {
+            var images = document.getElementsByClassName('output');
+            var image = images[images.length - 1];
+            image.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+
+

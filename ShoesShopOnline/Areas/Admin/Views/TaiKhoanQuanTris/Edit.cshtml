@@ -1,0 +1,78 @@
+﻿@model ShoesShopOnline.Models.TaiKhoan
+
+@{ ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml"; }
+
+<h2>Chi tiết tài khoản</h2>
+
+@using (Html.BeginForm())
+{
+                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal">
+                                    <div class="col-12 col-cl-10">
+                                        <div class="card card-body bg-white border-light shadow-sm mb-4">
+                                            <form action="/TaiKhoanQuanTris/Edit" method="post">
+                                                <div class="row">
+                                                    <input name="id" value="@Model.MaTK" hidden />
+                                                    <div class="col-md-6 mb-2">
+                                                        <div>
+                                                            <label for="category">Tên đăng nhập</label>
+                                                            <input class="form-control" type="text" value="@Html.DisplayFor(model => model.TenDangNhap)" readonly disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <div>
+                                                            <label for="nameProduct">Họ tên</label>
+                                                            <input class="form-control" type="text" value="@Html.DisplayFor(model => model.HoTen)" readonly disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                   
+                                                    <div class="col-md-6 mb-2">
+                                                        <div>
+                                                            <label for="size">Trạng thái</label>
+                                                            <div class="col-md-12">
+                                                                @* @if (Model.LoaiTK == "Admin")
+                                                                    {
+                                                                        @Html.DisplayFor(model => model.TrangThai)
+                                                                        @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+                                                                    }
+                                                                *@
+
+                                                                @*@if (Model.LoaiTK != "Admin")
+                                                                    {
+                                                                        <div class="checkbox">
+                                                                            @Html.EditorFor(model => model.TrangThai)
+                                                                            @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                     }*@
+
+
+                                                                <div class="checkbox">
+                                                                    @Html.EditorFor(model => model.TrangThai)
+                                                                    @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br /><br />
+                                                <div class="form-group">
+                                                    <div class="col-md-offset-2 col-md-10">
+                                                        <input type="submit" value="Save" style="background-color:darkgreen" class="btn btn-default" />
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,84 @@
+﻿@model List<ShoesShopOnline.Models.CartItem>
+@using ShoesShopOnline.Models
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+    decimal tongtien = 0;
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+@{
+    TaiKhoan tk = (TaiKhoan)Session[ShoesShopOnline.Session.ConstaintUser.USER_SESSION];
+}
+@section jsFooter{
+    <link href="~/Assets/Client/css/CustomButton.css" rel="stylesheet" />
+}
+
+<!-- Breadcrumb End -->
+<div style="margin-top:110px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 border rounded">       
+                    <h2 class="border btn-light" style="padding: 30px 0px; font-size: 2.4rem;">Thông tin thanh toán</h2>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.ValidationSummary(true)
+                        <div style="display:flex; padding-bottom:25px">
+                            <label style=" width: 35%;margin-top: 10px;">Họ và tên:</label>
+                            <input type="text" class="form-control" id="username" name="name" value="@tk.HoTen" required  style="width: 70%; border: none;  border-bottom: 1px solid #e4e6eb; -webkit-box-shadow: none;">
+
+                        </div>
+                        <div style="display: flex;padding-bottom: 25px">
+                            <label style=" width: 35%;margin-top: 10px;">Email:</label><br />
+                            <input type="email" class="form-control " id="email" name="email" value="@tk.Email" required  style="width: 70%; border: none;  border-bottom: 1px solid #e4e6eb; -webkit-box-shadow: none;">
+                        </div>
+                        <div style="        display: flex; padding-bottom: 25px">
+                            <label style=" width: 35%;margin-top: 10px;">Số điện thoại:</label>
+                            <input type="text" class="form-control" id="phone" name="phone" value="@tk.SDT" required  style="width: 70%; border: none;  border-bottom: 1px solid #e4e6eb; -webkit-box-shadow: none;">
+
+                        </div>
+                        <div style="        display: flex; padding-bottom: 25px">
+                            <label style=" width: 35%;margin-top: 10px;">Địa chỉ giao hàng:</label>
+                            <input type="text" class="form-control" id="address" name="address" value="@tk.DiaChi" required  style="width: 70%; border: none; border-bottom: 1px solid #e4e6eb; -webkit-box-shadow: none;">
+
+                        </div>
+                        <div style="display:flex;padding-bottom:25px;">
+                            <label style=" width: 55%;margin-top: 10px;">Ghi chú:</label>
+                            <textarea class="form-control" id="note" name="note" rows=5></textarea>
+                        </div>
+                        <div style=" padding: 10px; text-align: center">
+                            <button type="submit" class="btn btn-success w-100">Đặt hàng</button>
+                        </div>
+                    }
+            </div>
+         
+            <div class="col-lg-6 col-md-6">
+                <h2 style="padding: 30px 0px; font-size: 2.4rem;">Đơn hàng của bạn</h2>
+                <div class="your-order-table table-responsive" style="overflow-y:scroll;height:350px">
+                    @foreach (var item in Model)
+                    {
+                        tongtien = tongtien + @item.Gia * @item.SoLuong;
+                        <div style="width:100%;clear:both">
+                            <div style="float: left; width:30%;margin-bottom:30px;font-family: initial;">
+                                @{
+                                    string ImagePath = "~/wwwroot/Images/" + @item.ChiTietSanPham.AnhMoTa.HinhAnh;
+                                } <img src="@Url.Content(ImagePath)" width="120" height="120" class="img-thumbnail " />
+                            </div>
+                            <div style="float: left; width: 65%;color:#23232c">
+                                <h5 style="font-size:15px;line-height:20px">@item.ChiTietSanPham.AnhMoTa.SanPham.TenSP</h5>
+                                <p style="margin: 10px 0 10px 0; font-size: 16px;"><span style="color:#23232c;font-weight:500;">Size:</span> @item.KichCo</p>
+                                <p>Gía bán: @String.Format("{0:0,0}", item.Gia)</p>
+                            </div>
+                            <div style="float: left; text-align:right;margin-top: 7px;margin-left: 6px;"><b>X @item.SoLuong</b></div>
+                        </div>
+                        <div class="mb-5" style=" width: 100%;clear: both;border-top: 1px solid #f2f3f4;padding-bottom: 30px;">
+                        </div>
+                    }
+
+                </div>
+                <h5 colspan="6" style="text-align:right">
+                    <b style="font-size:20px; color:#000">Tổng tiền:<span>&nbsp</span>@String.Format("{0:0,0}", tongtien)<span>&nbsp VNĐ</span></b>
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>

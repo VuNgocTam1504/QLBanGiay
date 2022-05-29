@@ -1,0 +1,68 @@
+﻿@model ShoesShopOnline.Areas.Admin.Data.LoginAccount
+
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/Assets/Admin/css/style.css">
+
+</head>
+<body class="img js-fullheight" style="background-image: url(/Assets/Admin/images/bg.jpg);">
+
+    <section class="ftco-section">
+        <div class="container">
+            <div class="sign-admin">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 text-center mb-5">
+                        <h2 class="heading-section">LOG IN</h2>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="login-wrap p-0">
+                            <h3 class="mb-4 text-center">Have an account?</h3>
+                            @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "mt-4" }))
+                            {
+                @Html.ValidationMessage("ErrorLogin", new { @class = "text-danger" })
+                                <br />
+                                                <form action="Login" class="signin-form" method="post">
+                                                    <div class="form-group">
+                                                        @Html.TextBoxFor(model => model.username,
+                                                                     new { @class = "form-control", @name = "username", @autoforcus = "autofocus", @placeholder = "Username", @required = "required" })
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                                        @Html.PasswordFor(model => model.password,
+                                                                     new { @class = "form-control", @name = "password", @required = "required", @placeholder = "Password" })
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="form-control btn btn-primary submit px-3">Log In</button>
+                                                    </div>
+                                                </form>}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <script src="~/Assets/Admin/js/jquery.min.js"></script>
+    <script src="/Assets/Admin/js/popper.js"></script>
+    <script src="~/Assets/Admin/js/bootstrap.min.js"></script>
+    <script src="~/Assets/Admin/js/main.js"></script>
+
+</body>
+</html>

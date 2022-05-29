@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ShoesShopOnline.Models.DanhMucSP>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section script{
+    <script src="~/Areas/Admin/Assets/JS/DanhMuc.js"></script>
+}
+<head>
+    <style>
+        a {
+            color: white;
+        }
+
+            a:hover {
+                color: yellow;
+            }
+/*
+        .btnDelete {
+            color: white;
+            padding-top: 0px;
+            background-color: darkblue;
+            border: 1px solid black;
+            border-radius: 8px;
+            width: 100px;
+            height: 25px;
+            line-height: 25px;
+        }
+        */
+            .btnDelete:hover {
+                background-color: red;
+            }
+    </style>
+</head>
+<h2>Danh sách danh mục</h2>
+<p>
+    <button style="background-color: #428BCA; border-radius: 8px; border: none; margin: 10px 0px; padding: 7px 9px;">@Html.ActionLink("Thêm mới", "Create")</button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên danh mục
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="row-@item.MaDM">
+            <td>
+                @Html.DisplayFor(modelItem => item.TenDanhMuc)
+            </td>
+            <td>
+                <button class="btn btnDelete ThemMoi Crud" style="background-color: #FF6347; border-radius: 8px; color: #fff; width: 76px; font-size: 14px;border:none;" dataname="@item.MaDM" value="Xóa">Xóa</button>
+            </td>
+        </tr>
+    }
+</table>

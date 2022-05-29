@@ -1,0 +1,190 @@
+﻿@model PagedList.IPagedList<ShoesShopOnline.Models.ProductDetail>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css">
+@{
+    ViewBag.Title = "Cửa hàng";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    var sortOrder =  ViewBag.searchString ;
+    var madmView = ViewBag.madm;
+}
+
+
+<div class="bannerdoi">
+    <div class="container">
+        <div class="title"> <h1>@ViewBag.tendm</h1></div>
+    </div>
+</div>
+<!--content-->
+<!---->
+<div class="product">
+    <div class="container">
+       
+        <div class="col-md-3 product-price">
+            <div class=" rsidebar1 span_1_of_left">
+                <div class="of-left">
+                    <h3 class="cate">CHÍNH SÁCH ĐỔI TRẢ</h3>
+                </div>
+                <ul class="menu">
+                    <li class="itemm1">
+                        <a href="#">Giao hàng miễn phí 100% </a>
+
+
+                    </li>
+                    <li class="item2">
+                        <a href="#">An toàn với nhận hàng  </a>
+
+
+                    </li>
+                    <li class="item3">
+                        <a href="#">Bảo hành trong 60 ngày</a>
+
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class=" rsidebar1 span_1_of_left">
+                <div class="of-left">
+                    <h3 class="cate">Hướng dẫn bảo quản</h3>
+                </div>
+                <ul class="menu">
+                    <li class="itemm1">
+                        <a href="~/Views/NewFeed/Index.cshtml">Khử mùi bên trong giày</a>
+
+
+                    </li>
+
+                    <li class="item3">
+                        <a href="~/Views/NewFeed/Index.cshtml">Bảo quản giày</a>
+
+                    </li>
+
+                    <li class="item3">
+                        <a href="~/Views/NewFeed/Index.cshtml">Cách buộc giày</a>
+
+                    </li>
+
+                </ul>
+            </div>
+
+
+            <!--initiate accordion-->
+            <script type="text/javascript">
+                $(function () {
+                    var menu_ul = $('.menu > li > ul'),
+                        menu_a = $('.menu > li > a');
+                    menu_ul.hide();
+                    menu_a.click(function (e) {
+                        e.preventDefault();
+                        if (!$(this).hasClass('active')) {
+                            menu_a.removeClass('active');
+                            menu_ul.filter(':visible').slideUp('normal');
+                            $(this).addClass('active').next().stop(true, true).slideDown('normal');
+                        } else {
+                            $(this).removeClass('active');
+                            $(this).next().stop(true, true).slideUp('normal');
+                        }
+                    });
+                });
+            </script>
+
+
+
+        </div>
+        <div class="col-md-9 product1">
+            <div class="sort-product-item">
+                @*<p>@ViewBag.searchString</p>*@
+                @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+                {
+                    <select name="sortOrder" onchange="this.form.submit();">
+                        @if (ViewBag.searchString == "Tang")
+                        {
+                            <option value="">Sắp xếp</option>
+                            <option value="Tang" selected>Theo thứ tự giá: thấp đến cao</option>
+                            <option value="Giam">Theo thứ tự giá: cao đến thấp</option>
+                        }
+                        else if (ViewBag.searchString == "Giam")
+                        {
+                            <option value="">Sắp xếp</option>
+                            <option value="Tang">Theo thứ tự giá: thấp đến cao</option>
+                            <option value="Giam" selected>Theo thứ tự giá: cao đến thấp</option>
+                        }
+                        else
+                        {
+                            <option value="" selected>Sắp xếp</option>
+                            <option value="Tang">Theo thứ tự giá: thấp đến cao</option>
+                            <option value="Giam">Theo thứ tự giá: cao đến thấp</option>
+                        }
+
+
+                    </select>
+                    <input type="hidden" name="madm" value="@ViewBag.madm">
+                }
+
+                @{Html.RenderAction("SearchBox", "Home"); }
+            </div>
+            <div class=" bottom-product">
+                @if (ViewBag.Error != null)
+                {
+             <div class="alert alert-warning" role="alert" style="text-align:center">
+               @ViewBag.Error
+             </div>
+                  }
+                @foreach (var item in Model)
+                {
+    <div class="col-md-4 bottom-cd simpleCart_shelfItem">
+        <div class="product-at ">
+            <a href="@Url.Action("ProductDetail","Product", new { id = item.MaSP, maImage = item.maAnh,madm = item.MaDM })">
+                @{ string filePath = "~/wwwroot/images/" + item.Anh; }
+                <img class="img-responsive" src="@Url.Content(filePath)" alt="">
+                @{ var giamGia = Math.Floor(item.PhanTramKM * 100); }
+                @if (giamGia != 0)
+                {
+                    <div class="sale">
+                        <p>
+                            @giamGia %
+                        </p>
+
+                    </div>
+                }
+
+            </a>
+        </div>
+
+        <div class="name">
+            <h3><a href="@Url.Action("ProductDetail","Product", new { id = item.MaSP, maImage = item.maAnh,madm = item.MaDM })">@item.TenSP</a></h3>
+            @{ 
+               var GiamGia = item.GiaBan - (item.GiaBan * item.PhanTramKM);
+            }
+            
+        <div class="cost-product">
+            @if (item.GiaBan != GiamGia)
+            {
+            <del style=" font-size: 13px; color: #7A7A7A; margin-right: 5px; font-weight: 600;">@string.Format(info, "{0:c0}", item.GiaBan)</del>
+            }
+            <span></span><b>@string.Format(info, "{0:c0}", GiamGia)</b>
+        </div>
+        </div>
+    </div>}
+
+            </div>
+            <div class="clearfix"> </div>
+            <nav class="in">
+                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                @Html.PagedListPager(Model, page => Url.Action("Index", new
+                {
+                    page,
+                    madm = ViewBag.madm,
+                    searchPrice = ViewBag.searchPrice,
+                    searchString = ViewBag.searchString
+                }))
+            </nav>
+        </div>
+
+    </div>
+</div>
+<!---->
+<!--//content-->
+<!---->
+<!--//content-->

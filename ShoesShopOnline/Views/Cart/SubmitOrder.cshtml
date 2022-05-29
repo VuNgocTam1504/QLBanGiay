@@ -1,0 +1,20 @@
+﻿
+@{ ViewBag.Title = "SubmitOrder";
+                Layout = "~/Views/Shared/_LayoutClient.cshtml"; }
+<div class="container">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="submit-order" style=" max-width: 100%; width: 450px; padding: 15px; border: 1px solid #eee;background-color: #2f3542;border-radius: 10px; margin: 60px auto;">
+            <i class="fa-solid fa-check" style=" display: flex;  justify-content: center; margin: 20px 180px; COLOR: #FFF; border-radius: 50%; width: 60px; height: 60px; border: 1px solid #FFF; padding-top: 16px; font-size: 24px;"></i>
+            <h3 style="  margin-bottom: 30px; padding: 19px; font-size: 17px;line-height: 23px; color: #FFFF;font-weight: 700;
+">
+                Đơn hàng của quý khách đã được chúng tôi xác nhận. Chúng tôi sẽ liên hệ và giao hàng
+                sớm nhất cho quý khách.
+                Cảm ơn quý khách !
+            </h3>
+            <p>
+                @Html.ActionLink("Đơn hàng", "Index", "Bill")
+            </p>
+        </div>
+    </div>
+</div>
+

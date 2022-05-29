@@ -1,0 +1,42 @@
+﻿@model ShoesShopOnline.Models.AnhMoTa
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>AnhMoTa</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.SanPham.TenSP)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SanPham.TenSP)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.HinhAnh)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.HinhAnh)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MaAnh }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

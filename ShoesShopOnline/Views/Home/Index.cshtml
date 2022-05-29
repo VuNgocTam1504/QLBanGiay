@@ -1,0 +1,264 @@
+﻿@model IEnumerable<ShoesShopOnline.Models.ProductDetail>
+@{ ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_LayoutClient.cshtml";
+                var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
+<div class="banner">
+    <div class="container">
+     </div>
+</div>
+
+<!--content-->
+<div class="content">
+    <div class="container">
+        <!----TTin---->
+        <div class="infor-product">
+            <div class="item1">
+                <img src="~/Assets/Client/images/iconfinder_truck_1291768-1.png">
+                <div class="item1-content">
+                    <h5>GIAO HÀNG TOÀN QUỐC</h5>
+                    <p>Vận chuyển khắp Việt Nam</p>
+
+                </div>
+            </div>
+
+            <div class="item1">
+                <img src="~/Assets/Client/images/iconfinder_payment_1954199-3.png">
+                <div class="item1-content">
+                    <h5>THANH TOÁN KHI NHẬN HÀNG</h5>
+                    <p>Nhận hàng tại nhà rồi thanh toán</p>
+                </div>
+            </div>
+
+            <div class="item1">
+                <img src="~/Assets/Client/images/iconfinder_service_repair_phone_mobile_wrench_screw_driver_4014703-1.png">
+                <div class="item1-content">
+                    <h5>BẢO HÀNH DÀI HẠN</h5>
+                    <p>Bảo hành lên đến 60 ngày</p>
+                </div>
+            </div>
+
+            <div class="item1">
+                <img src="~/Assets/Client/images/iconfinder_refresh_3017918-1.png">
+                <div class="item1-content">
+                    <h5>ĐỔI HÀNG DỄ DÀNG</h5>
+                    <p>Đổi hàng thoải mái trong 30 ngày</p>
+                </div>
+            </div>
+        </div>
+        <div class="content-top">
+            <h1>TOP NHỮNG SẢN PHẨM MỚI NHẤT</h1>
+            <div class="grid-in">
+                @foreach (var item in Model)
+                {
+    <div class="col-md-3 grid-top" data-aos="zoom-in">
+        <a href="@Url.Action("ProductDetail","Product", new { id = item.MaSP, maImage = item.maAnh,madm = item.MaDM })">
+            @{ string filePath = "~/wwwroot/images/" + item.Anh; }
+            <img class="img-responsive" src="@Url.Content(filePath)" alt="">
+            @{ var giamGia = Math.Floor(item.PhanTramKM * 100); }
+            @if (giamGia != 0)
+            {
+    <div class="sale">
+        <p>
+            @giamGia %
+        </p>
+
+    </div>}
+
+        </a>
+        <div class="name">
+            <h3><a href="@Url.Action("ProductDetail","Product", new { id = item.MaSP, maImage = item.maAnh,madm = item.MaDM })">@item.TenSP</a></h3>
+            @{ var GiamGia = item.GiaBan - (item.GiaBan * item.PhanTramKM); }
+            <div class="cost-product">
+                @*  <del style=" font-size: 13px; color: #7A7A7A; margin-right: 5px; font-weight: 600;">850.000<u>đ</u></del> <span></span><b>@string.Format(info, "{0:c0}", item.GiaBan)</b>*@
+                @if (item.GiaBan != GiamGia)
+                {
+    <del style=" font-size: 13px; color: #7A7A7A; margin-right: 5px; font-weight: 600;">@string.Format(info, "{0:c0}", item.GiaBan)</del>}
+                <span></span><b>@string.Format(info, "{0:c0}", GiamGia)</b>
+            </div>
+        </div>
+    </div>}
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+
+
+        <div class="content-top">
+            <h1>TOP SẢN PHẨM BÁN CHẠY</h1>
+            <div class="grid-in">
+                @foreach (var item in ViewBag.ListHot)
+                {
+    <div class="col-md-3 grid-top" data-aos="zoom-in">
+
+        <a href="@Url.Action("ProductDetail","Product", new { id = item.MaSP, maImage = item.maAnh,madm = item.MaDM })" class="b-link-stripe b-animate-go  thickbox">
+            @{ string filePath = "~/wwwroot/images/" + item.Anh; }
+            <img class="img-responsive"
+                 src="@Url.Content(filePath)" alt="">
+            @{ var giamGia = Math.Floor(item.PhanTramKM * 100); }
+            @if (giamGia != 0)
+            {
+    <div class="sale">
+        <p>
+            @giamGia %
+        </p>
+
+    </div>}
+        </a>
+
+        <div class="name">
+            <h3><a href="@Url.Action("ProductDetail","Product", new { id = item.MaSP, maImage = item.maAnh,madm = item.MaDM })">@item.TenSP</a></h3>
+            @{ var GiamGia = item.GiaBan - (item.GiaBan * item.PhanTramKM); }
+
+            <div class="cost-product">
+                @* <del style=" font-size: 13px; color: #7A7A7A; margin-right: 5px; font-weight: 600;">850.000<u>đ</u></del>
+                <span></span><b>@string.Format(info, "{0:c0}", item.GiaBan)</b>*@
+                @if (item.GiaBan != GiamGia)
+                {
+    <del style=" font-size: 13px; color: #7A7A7A; margin-right: 5px; font-weight: 600;">@string.Format(info, "{0:c0}", item.GiaBan)</del>}
+                <span></span><b>@string.Format(info, "{0:c0}", GiamGia)</b>
+            </div>
+        </div>
+    </div>}
+                <div class="clearfix"> </div>
+
+
+            </div>
+            <br />
+            <div class="content-top">
+                <h1>KHÁCH HÀNG NÓI GÌ VỀ XSHOP </h1>
+                <div class="grid-in">
+                    <div class="col-md-4 grid-top product-item" data-aos="zoom-in">
+                        <div class="swiper-slide">
+                            <div class="elementor-testimonial">
+                                <div class="elementor-testimonial-content">
+                                    <div class="elementor-testimonial-text">
+                                        Giày bên shop có nhiều mẫu đẹp lắm , nhưng mà mình ưa mỗi van cá mập thôi , vừa mới mua bên shop , giày vừa , đẹp , sau ra mua ủng hộ shop tiếp
+                                    </div>
+
+                                </div>
+                                <div id="triangle_down"></div>
+                                <div class="elementor-testimonial-footer">
+                                    <div class="elementor-testimonial-image">
+                                        <img src="~/Assets/Client/images/feedback.png">
+                                    </div>
+                                    <div class="elementor-testimonial-cite">
+                                        <span class="elementor-testimonial-name">Đức Nguyễn</span>
+                                        <span class="elementor-testimonial-title">Nhân Viên Ngân Hàng</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 grid-top product-item" data-aos="zoom-in">
+                        <div class="swiper-slide">
+                            <div class="elementor-testimonial">
+                                <div class="elementor-testimonial-content">
+                                    <div class="elementor-testimonial-text">
+                                        Em mua đôi converse của shop cách đây 2 days 💙 Rất đẹp ạ.Giao hàng cũng rất nhanh. Mọi người nhớ ghé ủng hộ shop nhá 💦. Có dịp em sẽ ghé lại shop!
+                                    </div>
+                                </div>
+
+                                <div id="triangle_down"></div>
+                                <div class="elementor-testimonial-footer">
+                                    <div class="elementor-testimonial-image">
+                                        <img src="~/Assets/Client/images/feedback.png">
+                                    </div>
+                                    <div class="elementor-testimonial-cite">
+                                        <span class="elementor-testimonial-name">Vũ Ngọc Tâm</span>
+                                        <span class="elementor-testimonial-title">Nhân Viên Văn Phòng</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 grid-top product-item" data-aos="zoom-in">
+                        <div class="swiper-slide">
+                            <div class="elementor-testimonial">
+                                <div class="elementor-testimonial-content">
+                                    <div class="elementor-testimonial-text">
+                                        2 lần mua ở shop rồi chất lượng và mọi thứ đều Oke ủng hộ shop dài. Cảm ơn shop đã có nhiều đôi giày đẹp
+                                        <3. Shop nhớ cập nhật mẫu mã liên tục nhé
+                                    </div>
+                                </div>
+
+                                <div id="triangle_down"></div>
+                                <div class="elementor-testimonial-footer">
+                                    <div class="elementor-testimonial-image">
+                                        <img src="~/Assets/Client/images/feedback.png">
+                                    </div>
+                                    <div class="elementor-testimonial-cite">
+                                        <span class="elementor-testimonial-name">Vũ Ngọc Tâm</span>
+                                        <span class="elementor-testimonial-title">Giám Đốc Bộ Phận</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+
+            </div>
+
+            <div class="content-top-center" data-aos="fade-right" data-aos-delay="100">
+                <div class="introduce">
+                    <p>
+                        Hơn 6 năm phát triển, XSHOP luôn mang đến những mẫu giày chất lượng tốt nhất với giá cả hợp lí
+                        nhất đến tay người tiêu dùng với hệ thống cửa hàng Số 1 Hà Nội và bán online khắp Việt Nam.
+                    </p>
+
+                    <div class="product-sold">
+                        <SPAN>1 349 800</SPAN>
+                        <p>SẢN PHẨM ĐÃ BÁN</p>
+                    </div>
+
+
+                </div>
+
+                <div class="video">
+                    <a href="https://www.youtube.com/watch?v=a1ILAowCiOw&list=TLGG3l7cyXWDlJEzMDExMjAyMQ&t=12s">
+                        <img class="img-responsive"
+                             src="~/Assets/Client/images/hqdefault.jpg">
+                    </a>
+                </div>
+
+
+
+            </div>
+            <div class="content-top">
+                <h1>TIN TỨC MỚI NHẤT</h1>
+                <div class="grid-in">
+                    @foreach (var item in ViewBag.ListNewFeed)
+                    {
+        <div class="col-md-4 grid-top" data-aos="flip-up" data-aos-delay="100">
+            <div class="col-md-4a">
+                <a href="@Url.Action("Single","NewFeed", new { ma = item.MaTin})" class="b-link-stripe b-animate-go thickbox">
+                    <img class="img-responsive" src="~/Assets/Client/images/17.jpg" alt="">
+                    @*<div class="infor-fashion">
+                        <p>TIN TỨC THỜI TRANG</p>
+                    </div>*@
+                </a>
+
+                <div class="name1">
+                    <h3><a href="@Url.Action("Single","NewFeed", new { ma = item.MaTin})">@item.TenTin</a></h3>
+                    <div class="see-detail">
+                        <p>Xem chi tiết<span><i class="far fa-arrow-alt-circle-right"></i></span></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>}
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-system">
+        <a href="@Url.Action("HeThongCuaHang","Home")">
+            <img src="~/Assets/Client/images/21.png" / style="width:100%">
+        </a>
+    </div>
+
+</div>
+

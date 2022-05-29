@@ -1,0 +1,158 @@
+﻿@model ShoesShopOnline.Models.Contact
+@{
+    ViewBag.Title = "AddContact";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+<style>
+    .shop-system {
+        display: flex;
+        width: 100%;
+        padding-bottom: 27px;
+        margin-top: 50px;
+        border-top: 1px solid #e5e5e5;
+        padding-top: 50px;
+    }
+
+    .google-map {
+        width: 65%;
+    }
+
+    iframe {
+        width: 100%;
+        height: 450px;
+    }
+
+    .shop-system-title {
+        margin-left: 30px;
+    }
+
+        .shop-system-title h3 {
+            color: #23232c;
+            font-size: 45px;
+            line-height: 1.2;
+            font-weight: 500;
+            display: block;
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 60px;
+        }
+
+    .elementor-widget-container ul {
+        list-style-type: none;
+        line-height: 1.5;
+        font-size: 15px;
+        font-family: -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif;
+        padding: 0px 10px;
+    }
+
+        .elementor-widget-container ul li {
+            padding-bottom: 10px;
+        }
+
+    .elementor-icon-list-icon {
+        margin-right: 6px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .elementor-icon-list-title {
+        color: #7C7C80;
+    }
+        
+</style>
+<div class="contact">
+    <div class="container">
+        <h1>Liên hệ với XShop</h1>
+        <div class="contact-form">
+            <div class="col-md-7 contact-grid">
+                @using (Html.BeginForm("AddContact", "Contact"))
+                {
+                    <input type="text" value="Name" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='Name';}" name="CustomerName">
+                    <input type="text" value="Email" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='Email';}" name="Email">
+                    <input type="text" value="Phone" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='Phone';}" name="Phone">
+                    <textarea cols="77" rows="5" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = 'Message';}" name="Content">Message</textarea>
+                    <div class="send">
+                        <input type="submit" value="Send" />
+                    </div>
+                }
+
+            </div>
+            <div class="col-md-5 contact-in">
+                <div class="address-more">
+                    <div class="content">
+
+                        <div class="elementor-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+
+
+                        <div class="elementor-content">
+                            <h3 class="elementor-title">
+                                097 567 1080
+                            </h3>
+                            <p class="elementor-text"> Hỗ trợ từ 9:00 - 21:00</p>
+                        </div>
+
+                        <div class="address">
+                            <p>
+                                <span>Địa chỉ:&nbsp;</span>57 Quan Hoa, Cầu Giấy, Hà Nội
+                            </p>
+
+                        </div>
+                        <div class="address">
+                            <p><span>Email&nbsp;</span>contact.giayxshop.vn</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class=" clearfix "> </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="shop-system">
+        <div class="google-map">
+            <iframe src="https://www.google.com/maps/d/embed?mid=1SbN6ahfx-uWQgDPKmQCm6uD1UOvanulP&ll=20.975081594591092%2C105.87299107096004&z=13"></iframe>
+        </div>
+        <div class="shop-system-title">
+            <h3>Hệ thống cửa hàng XShop </h3>
+            <div class="elementor-widget-container">
+                <ul class="elementor-icon-list-item">
+                    <li style=" border-bottom: 1px solid #ddd;">
+                        <span class="elementor-icon-list-icon"><i class="fa-solid fa-check"></i></span>
+                        <span class="elementor-icon-list-title">57 Quan Hoa, Cầu Giấy, Hà Nội</span>
+                    </li>
+                    <li style=" border-bottom: 1px solid #ddd;margin-top: 10px;">
+                        <span class="elementor-icon-list-icon"><i class="fa-solid fa-check"></i></span>
+                        <span class="elementor-icon-list-title">
+                            29 Trần Đại Nghĩa, Hai Bà Trưng
+                        </span>
+                    </li>
+                    <li style="margin-top: 10px;">
+                        <span class="elementor-icon-list-icon"><i class="fa-solid fa-check"></i></span>
+                        <span class="elementor-icon-list-title">61 Trần Phú, Hà Đông</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+@if (ViewBag.message != null)
+{
+<script type="text/javascript">
+
+        window.onload = function () {
+            swal("@ViewBag.message", {
+                        icon: "success",
+                        timer: 4000
+                    });
+               
+            };
+</script>
+
+}
+
+
+
+

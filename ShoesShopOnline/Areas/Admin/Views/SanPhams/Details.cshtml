@@ -1,0 +1,54 @@
+﻿@model ShoesShopOnline.Models.SanPham
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    string[] images = ViewBag.filePath.Split(';');
+    string image = "";
+    for (int i = 0; i < images.Length; i++)
+    {
+        image += "<img class=\"rounded\" alt=\"Ảnh\" style=\"margin: 20px\" width=\"150\" height=\"150\" src=\"/wwwroot/Images/" + images[i] + "\">";
+    }
+}
+
+<div>
+    <h4>@Model.TenSP</h4>
+    <hr />
+    <div>
+        <label for="TenDM">Danh mục :</label>
+        <span>@Model.DanhMucSP.TenDanhMuc</span>
+    </div>
+    <div>
+        @Html.Raw(System.Web.HttpUtility.HtmlDecode(image))
+    </div>
+    <div>
+        <label for="MoTa">Mô tả :</label>
+        @Html.Raw(System.Web.HttpUtility.HtmlDecode(@Model.MoTa))
+    </div>
+    <div>
+        <label for="GiaBan">Giá bán :</label>
+        <span>@string.Format(info, "{0:c0}", Model.GiaBan)</span>
+    </div>
+    <div>
+        <label for="GiaBan">Các size sẵn có :</label>
+        <span>@ViewBag.listSize</span>
+    </div>
+    <div>
+        <label for="NgayTao">Ngày tạo :</label>
+        <span>@Model.NgayTao</span>
+    </div>
+    <div>
+        <label for="NgaySua">Ngày sửa :</label>
+        <span>@Model.NgaySua</span>
+    </div>
+    <div>
+        <label for="MaKH">Mã khuyến mại :</label>
+        <span>@Model.MaKM</span>
+    </div>
+</div>
+    <p>
+        <hr />
+        <a class="btn ThemMoi" style="margin-right:20px" href="~/Admin/SanPhams/Edit/@Model.MaSP">Sửa sản phẩm</a>
+        <a class="btn ThemMoi" href="~/Admin/SanPhams/Index">Trở về</a>
+    </p>
+

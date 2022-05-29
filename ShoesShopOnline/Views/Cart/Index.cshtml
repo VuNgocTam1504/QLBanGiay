@@ -1,0 +1,80 @@
+﻿
+@model List<ShoesShopOnline.Models.CartItem>
+@{
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    decimal tongtien = 0;
+
+}
+@section jsFooter{
+    <script src="~/Assets/Client/controller/cartController.js"></script>
+    <link href="~/Assets/Client/css/CustomButton.css" rel="stylesheet" />
+}
+
+<h2>Giỏ Hàng</h2>
+<div class="content" style="margin:50px 200px">
+    @if (Model.Count > 0)
+    {
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th style="border:none">Tên sản phẩm</th>
+                    <th style="border:none">Ảnh</th>
+                    <th style="border:none">Đơn giá</th>
+                    <th style="border:none">Size giày</th>
+                    <th style="border:none">Số lượng</th>
+                    <th style="border:none">Thành tiền</th>
+                    <th style="border:none">Xóa</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    tongtien = tongtien + @item.Gia * @item.SoLuong;
+                    <tr id="row-order-@item.MaAnh@item.KichCo">
+                        <td>@item.ChiTietSanPham.AnhMoTa.SanPham.TenSP</td>
+                        <td>
+
+                            @{
+                                string ImagePath = "~/wwwroot/Images/" + @item.ChiTietSanPham.AnhMoTa.HinhAnh;
+                            } <img src="@Url.Content(ImagePath)" width="100" class="img-thumbnail" />
+
+                        </td>
+                        <td>
+
+                                                @{ var GiamGia = item.ChiTietSanPham.AnhMoTa.SanPham.GiaBan - (item.ChiTietSanPham.AnhMoTa.SanPham.GiaBan * item.ChiTietSanPham.AnhMoTa.SanPham.KhuyenMaiSP.PhanTramKM); }
+                                                @if (item.ChiTietSanPham.AnhMoTa.SanPham.GiaBan != GiamGia)
+                                                { 
+
+                                                <b>@string.Format(info, "{0:c0}", GiamGia)</b>}
+
+                                            </td>
+                        <td>@item.KichCo</td>
+                        <td><input type="number" class="txtQuantity" data-id="@item.MaAnh" data-kichco="@item.KichCo" min="1" value="@item.SoLuong" /></td>
+                        <td id="thanh-tien-@item.MaAnh@item.KichCo">@String.Format("{0:0,0}", ((item.ChiTietSanPham.AnhMoTa.SanPham.GiaBan - (item.ChiTietSanPham.AnhMoTa.SanPham.GiaBan * item.ChiTietSanPham.AnhMoTa.SanPham.KhuyenMaiSP.PhanTramKM))* item.SoLuong))</td>
+                        <td>
+                            <div class="clearfix"></div>
+                            <button id="deleteId" data-id="@item.MaAnh" data-kichco="@item.KichCo" class="btnDelete">X</button>
+                        </td>
+                    </tr>
+                }
+                <tr>
+
+                    <td colspan="6" style="text-align:right">
+                        <strong style="font-size:20px">Tổng tiền:&nbsp<span class="amount" id="order-total">@String.Format("{0:0,0}", tongtien) &nbsp VNĐ</span></strong>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="text-align: center; margin-top: 40px;">
+            <button id="btnContinute" class="btn" style="margin-right:8px;">Tiếp tục mua hàng</button>
+            <button id="btnPayment" class="btn">Thanh toán</button>
+        </div>
+       
+    }
+    else
+    {
+        <h3>Chưa có sản phẩm nào trong giỏ hàng !</h3>
+    }
+
+</div>

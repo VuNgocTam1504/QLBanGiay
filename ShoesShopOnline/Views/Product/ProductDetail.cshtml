@@ -1,0 +1,508 @@
+﻿@using ShoesShopOnline.Models
+@model ShoesShopOnline.Models.ProductDetail
+@{ ViewBag.Title = "ProductDetail";
+                Layout = "~/Views/Shared/_LayoutClient.cshtml";
+                var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                var listAnh = ViewBag.Images;
+                int maAnh = listAnh[0].MaAnh;
+                int KichCo;
+    }
+
+@section jsFooter{
+    <script src="~/Assets/Client/controller/cartController.js"></script>
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="~/Assets/Client/js/main.js"></script>
+<link href="~/Assets/Client/css/CustomButton.css" rel="stylesheet" />
+<style>
+        .accordion-container2{
+            margin-left:10px;
+        }
+        .bs-example {
+            margin: 20px;
+        }
+
+        .panel-body {
+            margin: 1rem 0 2rem;
+        }
+
+        .addProductInfo {
+            border: 5px dashed #f1f1f1;
+            text-align: left;
+        }
+
+        .freeShipping,
+        .codPayment,
+        .returnGoods {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem 0;
+            margin: 0 1.5rem;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .freeShipping i,
+        .codPayment i,
+        .returnGoods i {
+            margin-right: 2rem;
+            padding: 1.5rem 1rem;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            /* top: 10px; */
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .freeShipping .box-icon {
+            color: #e6ae15;
+            background-color: #fff4b8;
+        }
+
+        .codPayment .box-icon {
+            color: #00d994;
+            background-color: #bff9d0;
+        }
+
+        .returnGoods .box-icon {
+            background-color: #ffd0d0;
+            color: #d45757;
+        }
+
+        .panel-title .glyphicon {
+            font-size: 14px;
+        }
+
+        .panel,
+        .panel-default {
+            border: none;
+            margin: 0px;
+        }
+
+        .panel-default > .panel-heading {
+            background-color: #fff;
+            border-color: #eee;
+            border: none;
+        }
+
+        .panel-title .glyphicon {
+            font-size: 12px;
+            margin-left: 80px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .panel-body ul {
+            margin-left: 20px;
+        }
+
+            .panel-body ul p {
+                line-height: 27px;
+            }
+        .box-size{
+            display:flex;
+        }
+        .box-size a {
+            font-size: 13px;
+            margin-left:auto;
+            font-weight: 500;
+            color: #d45757;
+        }
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    .modal-body{
+        text-align:center;
+    }
+        .modal-body h4 {
+            font-size:14px;
+            font-weight:700;
+        }    .modal-body img {
+            width: 90%;
+        }
+</style>
+<script>
+    $(document).on("click", "#cust_btn", function () {
+
+        $("#myModal").modal("toggle");
+
+    })
+</script>
+<!--content-->
+<!---->
+<div class="product">
+    <div class="container">
+        <div class="col-md-12 product-price1">
+            <div class="col-md-7 single-top">
+                <div class="flexslider">
+                    <ul class="slides">
+                        @{ string filePath = "~/wwwroot/images/" + Model.Anh;
+                                        maAnh = Model.maAnh; }
+                        <li data-thumb="">
+                            <img src="@Url.Content(filePath)">
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- FlexSlider -->
+
+                <script defer src="~/Assets/Client/js/jquery.flexslider.js"></script>
+                <link rel="stylesheet" href="~/Assets/Client/css/flexslider.css" type="text/css" media="screen" />
+                <script>
+                    // Can also be used with $(document).ready()
+                    $(window).load(function () {
+                        $('.flexslider').flexslider({
+                            animation: "slide",
+                            controlNav: "thumbnails"
+                        });
+                    });
+                    $(document).ready(function () {
+                        $('.kich-co').off('click').on('click', function () {
+                            var kickco = $(this).attr('data');
+                            $('.kich-co').removeClass('active');
+                            $(this).addClass('active');
+                            $('#kichco').val(kickco);
+                        });
+                        $('.flexslider').flexslider({
+                            animation: "slide",
+                            controlNav: "thumbnails"
+                        });
+                    });
+                </script>
+
+                <div class="description">
+                    <p class="desc_title">Mô tả</p>
+                    <hr>
+                    @Html.Raw(Model.MoTa);
+                </div>
+            </div>
+            <div class="col-md-5 single-top-in simpleCart_shelfItem">
+                <div class="single-para ">
+                    <h4>@Model.TenSP</h4>
+                    <div class="star-on">
+                        <div class="review">
+                            <a href="#">
+                                Chất liệu cao cấp,bền đẹp theo thời gian.Thiết kế thời trang. Kiểu dáng
+                                phong cách. Độ bền cao. Dễ phối đồ.
+                            </a>
+
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+
+                    <div class="cost-product1">              
+                        @{
+                            var GiamGia = Model.GiaBan - (Model.GiaBan * Model.PhanTramKM);
+                        }
+                        @if (Model.GiaBan != GiamGia)
+                        {
+                    <del style=" font-size: 13px; color: #7A7A7A; margin-right: 5px; font-weight: 600;">@string.Format(info, "{0:c0}", Model.GiaBan )</del>}
+                        <span></span><b>@string.Format(info, "{0:c0}", GiamGia)</b>
+
+                    </div>
+                    <div class="color_container ">
+                        <p class="color_title">Màu sắc</p>
+                        <div class="color_image">
+                            @foreach (var item in ViewBag.Images)
+                            {
+
+                <div class="color_image--1">
+                    <a href="@Url.Action("ProductDetail","Product", new { id = item.MaSP, maImage = item.MaAnh,madm = Model.MaDM })">
+                        @{ string filePathColor = "~/wwwroot/images/" + item.HinhAnh; }
+                        <img src="@Url.Content(filePathColor)">
+                    </a>
+                </div>}
+                        </div>
+                    </div>
+                    <div class="Size">
+                        <div class="box-size">
+                            <p class="title">Kích cỡ</p>
+                                <!-- Trigger the modal with a button -->
+                            <a class=" cust_btn" data-toggle="modal" data-target="#myModal">
+                                Hướng dẫn chọn size giày <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h3 class="modal-title">Hướng dẫn chọn Size giày</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h4>B1: Đặt chân lên tờ giấy trắng và dùng bút vẽ bo hết 1 vòng bàn chân</h4>
+                                                <img src="~/Assets/Client/images/chon-size-giay-1.png">
+                                            </div>
+                                            <div class="modal-body">
+                                                <h4>B2: Dùng dây hoặc thước dây đo 1 vòng chân vị trí phần khớp hoặc phần rộng nhất lúc đang đứng hoặc ngồi</h4>
+                                                <img src="~/Assets/Client/images/chon-size-giay-2.png">
+                                            </div>
+                                            <div class="modal-body">
+                                                <h4>B3: So sánh chiều dài và rộng với bảng size dưới đây</h4>
+
+                                                <table>
+                                                    <tr>
+                                                        <th>Size</th>
+                                                        <th>Chiều Dài (cm)</th>
+                                                        <th>Chiều Rộng (cm)</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>35</td>
+                                                        <td>21,7</td>
+                                                        <td>20,4</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>36</td>
+                                                        <td>22,5</td>
+                                                        <td>20,9</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>37</td>
+                                                        <td>23,1</td>
+                                                        <td>21,4</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>38</td>
+                                                        <td>23,7</td>
+                                                        <td>21,9</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>39</td>
+                                                        <td>24,4</td>
+                                                        <td>22,3</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>40</td>
+                                                        <td>25,1</td>
+                                                        <td>22,9</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>41</td>
+                                                        <td>25,9</td>
+                                                        <td>23,5</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>42</td>
+                                                        <td>26,6</td>
+                                                        <td>24,1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>43</td>
+                                                        <td>27,3</td>
+                                                        <td>24,7</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>44</td>
+                                                        <td>28,1</td>
+                                                        <td>25,5</td>
+                                                    </tr>
+                                                </table>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+</div>
+         
+                        <div class="attribute-swatch">
+                            @foreach (var item in ViewBag.SizeList)
+                            {
+                                if (item == @ViewBag.SizeList[0])
+                                {
+                <div class="swatchinput">
+                    <label class="kich-co active" style="width: 65px; margin: 0;padding:10px" data="@item.KichCo">@item.KichCo</label>
+                </div> }
+                                else
+                                {
+                <div class="swatchinput">
+                    <label class="kich-co" style="width: 65px; margin: 0;padding:10px " data="@item.KichCo">@item.KichCo</label>
+                </div>}
+
+                            }
+                            <input id="kichco" style="visibility:hidden;width:10px;height:4px" value="@ViewBag.SizeList[0].KichCo" />
+                        </div>
+                    </div>
+                    <div class="star-on">
+                        <button class="btnAddCart" data-id="@maAnh" style="width: 100%;font-size: 1.2em;line-height: 20px;height: 60px;color: #fff;background: #000;margin: 0px 20px;">
+                            MUA NGAY
+                            <div class="ship"><span style="font-size:13px">Giao tận nhà - Đổi trả dễ dàng</span></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+
+                <div class="accordion-container2">
+                    <div class="accordion-head">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">CHÍNH SÁCH GIAO HÀNG VÀ ĐỔI TRẢ <span class="glyphicon glyphicon-plus" style=" margin-left:63px;color: #000; font-size: 11px;"></span></a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse in">
+
+                                <div class="panel-body">
+                                    <div class="addProductInfo">
+                                        <div class="freeShipping">
+                                            <i class="fa-solid fa-truck box-icon"></i>Giao hàng hoàn toàn miễn phí 100%
+                                        </div>
+                                        <div class="codPayment">
+                                            <i class="fa-solid fa-shield-halved box-icon"></i>An toàn với nhận hàng và trả tiền tại nhà
+                                        </div>
+                                        <div class="returnGoods">
+                                            <i class="fa-solid fa-right-left box-icon"></i>Bảo hành đổi trả trong vòng 60 ngày
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-head">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">HƯỚNG DẪN BẢO QUẢN<span class="glyphicon glyphicon-plus" style=" margin-left: 160px; color: #000;font-size: 11px;"></span></a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li>
+                                            <strong>Khử mùi bên trong</strong>
+                                        </li>
+                                    </ul>
+                                    <p>Bạn hãy đặt túi đựng viên chống ẩm vào bên trong giày để hút ẩm và rắc phấn rôm (có thể thay bằng cách đặt vào bên trong giày gói trà túi lọc chưa qua sử dụng) để khử mùi, giúp giày luôn khô thoáng. </p>
+                                    <p>Để hạn chế mùi hôi và sự ẩm ướt cho giày, hãy chọn vớ chân loại tốt, có khả năng thấm hút cao. Ngoài ra, dùng các loại lót giày khử mùi cũng là một phương pháp tốt.</p>
+                                    <ul>
+                                        <li>
+                                            <strong>Bảo quản khi không sử dụng</strong>
+                                        </li>
+                                    </ul>
+                                    <p>
+                                        Khi sử dụng giày, bạn đừng vội vứt hộp đi mà hãy cất lại để dành. Khi không sử dụng, hãy nhét một ít giấy vụn vào bên trong giày để giữ cho dáng giày luôn chuẩn, đẹp. Sau đó đặt giày vào hộp bảo quản cùng túi hút
+                                        ẩm.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="accordion-head" style="margin-left:14px">
+                        <a href="">
+                            TỔNG ĐÀI BÁN HÀNG : <span><i class="fas fa-phone-square-alt"></i> 097.789.123</span>
+                            <p>Miễn phí từ(8:30-21:30) mỗi ngày</p>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="clearfix"> </div>
+        </div>
+        <div class="col-md-12 product-pricel" style="margin-bottom:100px ;">
+            <div class="col-md-6 single-top">
+                <div class="item-shoe">
+                    <img src="~/wwwroot/images/chatluong.PNG">
+                    <div class="content">
+                        <h5>Chất lượng sản phẩm?</h5>
+                        <p>Sản phẩm luôn được XShop kiểm định, đánh giá cao trước khi đến tay khách hàng</p>
+                    </div>
+                </div>
+
+                <div class="item-shoe">
+                    <img src="~/wwwroot/images/mausac.PNG">
+                    <div class="content">
+                        <h5>Sai màu sản phẩm?</h5>
+                        <p>Vì 1 số yếu tố khách quan như độ sáng màn hình nên sản phẩm có thể không đúng màu</p>
+                    </div>
+                </div>
+
+                <div class="item-shoe">
+                    <img src="~/wwwroot/images/danhgia.PNG">
+                    <div class="content">
+                        <h5>Hàng có sẵn không?</h5>
+                        <p>Sản phẩm luôn có sẵn tại XShop </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 single-top">
+                <div class="item-shoe">
+                    <img src="~/wwwroot/images/clock.PNG">
+                    <div class="content">
+                        <h5>Thời gian giao hàng?</h5>
+                        <p>
+                            Chúng tôi sử dụng đơn vi vận chuyển
+                            uy tín và nhanh chóng nhất, thời dự kiến từ 1-4 ngày tuy khu vực.
+                        </p>
+                    </div>
+                </div>
+                <div class="item-shoe">
+                    <img src="~/wwwroot/images/clock.PNG">
+                    <div class="content">
+                        <h5>Thời gian làm việc?</h5>
+                        <p>Hệ thống cửa hàng và Online làm việc từ 8:30 - 22:00 hàng ngày. </p>
+                    </div>
+                </div>
+                <div class="item-shoe">
+                    <img src="~/wwwroot/images/clock.PNG">
+                    <div class="content">
+                        <h5>Đổi hàng như nào</h5>
+                        <p>Việc đổi hàng rất dễ dàng và chúng tôi luôn muốn khách hàng ưng ý nhất. Hãy liên hệ fanpage để đổi!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-top">
+            <h5>SẢN PHẨM TƯƠNG TỰ</h5>
+            <div class="grid-in">
+                @*<h2>@ViewBag.check</h2>
+                    <a href="~/Views/Product/Index.cshtml">~/Views/Product/Index.cshtml</a>*@
+                @foreach (ProductDetail item in ViewBag.ListRelate)
+                {
+    <div class="col-md-3 grid-top">
+        @{ string productRelatePath = "~/wwwroot/images/" + item.Anh; }
+        <a href="@Url.Action("ProductDetail","Product", new { id = item.MaSP, maImage = item.maAnh,madm = item.MaDM })" class="b-link-stripe b-animate-go  thickbox">
+            <img class="img-responsive" src="@Url.Content(productRelatePath)" alt="">
+            @*<div class="sale">
+            <p>GIẢM 20%</p>
+        </div>*@
+
+            @{ var giamGia = Math.Floor(item.PhanTramKM * 100); }
+            @if (giamGia != 0)
+            {
+        <div class="sale">
+            <p>
+                @giamGia %
+            </p>
+
+        </div>}
+        </a>
+
+        <div class="name">
+            <h3><a href="@Url.Action("ProductDetail","Product", new { id = item.MaSP, maImage = item.maAnh,madm = item.MaDM })">@item.TenSP</a></h3>
+            <div class="cost-product">
+                <span></span><b>@string.Format(info, "{0:c0}", item.GiaBan)</b>
+            </div>
+        </div>
+    </div>}
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <!--//content-->
+</div>

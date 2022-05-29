@@ -1,0 +1,196 @@
+﻿@{
+    ShoesShopOnline.Models.TaiKhoan tk =
+            (ShoesShopOnline.Models.TaiKhoan)HttpContext.Current.Session[ShoesShopOnline.Session.ConstaintUser.USER_SESSION];
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>XShop - Hệ thống bán giày thể thao số 1 tại Hà Nội</title>
+    <link rel="icon" type="image/x-icon" href="~/wwwroot/Images/images.png">
+    <link href="~/Assets/Client/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script src="~/Assets/Client/js/jquery.min.js"></script>
+    <!-- Custom Theme files -->
+    <!--theme-style-->
+    <link href="~/Assets/Client/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--fonts-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+    <!--alert-->
+    <!--//fonts-->
+    <!-- start menu -->
+    <link href="~/Assets/Client/css/memenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="~/Assets/Client/js/memenu.js"></script>
+    <script>$(document).ready(function () { $(".memenu").memenu(); });</script>
+    <script src="~/Assets/Client/js/simpleCart.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    @*thông báo json*@
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/Assets/Admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <!--header-->
+    <div class="header">
+        <div class="header-top">
+            <div class="container">
+                @*    @{Html.RenderAction("SearchBox", "Home"); }*@
+                <span>
+                    <a href="@Url.Action("HeThongCuaHang","Home")">🛍HỆ THỐNG CỬA HÀNG XSHOP</a>
+                </span>
+                <div class="header-left">
+                    <ul class="navbar-nav float-end" style="display:flex; ">
+                        @if (tk != null)
+                        {
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg" class="rounded-circle" alt="avt" style="width: 35px">
+                    <span><strong style="font-size: 12px;">@tk.HoTen</strong></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown" style="background-color: rgb(70, 130, 180);font-size: 13px;margin-top:-9px!important;">
+                    <li><a class="dropdown-item" href="@Url.Action("Index","Bill")"><i class="fas fa-shopping-basket" style=" margin-right: 10px; color: #FFFF66;"></i>Đơn hàng của bạn</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("UserInfor","AccountUser",new { id = tk.MaTK })"><i class="fas fa-user" style=" margin-right: 10px; color: #FFFF66;"></i>Thông tin tài khoản</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("ChangePassWord","AccountUser")"><i class="fas fa-lock" style=" margin-right: 10px; color: #FFFF66;"></i>Đổi mật khẩu</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("Logout","Home")"><i class="fas fa-sign-out-alt" style=" margin-right: 10px; color: #FFFF66;"></i>Đăng xuất</a></li>
+                </ul>
+            </li>
+}
+                        @if (tk == null)
+                        {
+            <li><a href="@Url.Action("Login", "Home")">Đăng nhập</a></li>
+                            <li><a href="@Url.Action("SignUp", "Home")">Đăng ký</a></li>}
+                    </ul>
+
+                    @{ Html.RenderAction("HeaderCart", "Home");}
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="container" style="padding-top:0px">
+            <div class="head-top">
+                <div class="logo">
+                    <a href="@Url.Action("Index","Home")"><img src="~/Assets/Client/images/logoxshop.PNG" alt=""></a>
+                </div>
+                <div class=" h_menu4">
+                    <ul class="memenu skyblue">
+
+                        <li><a class="color4" href="@Url.Action("Index","Home")">TRANG CHỦ</a></li>
+                        <li class="grid">
+                            <a class="color2" href="">DANH MỤC </a>
+                            <div class="mepanel">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="h_nav">
+                                            <ul>
+                                                @{ Html.RenderAction("DanhMuc", "Home");}
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!---->
+                        <li><a class="color4" href="@Url.Action("Index","NewFeed")">TIN TỨC</a></li>
+                        <li><a class="color6" href="@Url.Action("Index","Contact")">LIÊN HỆ</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <!--content-->
+    <div style="margin-top:50px">
+        @RenderBody()
+    </div>
+
+     
+    <div class="footer">
+        <div class="container">
+            <div class="footer-top-at">
+                <div class="col-md-3 amet-sed " data-aos="fade-right" data-aos-delay="200">
+                    <div class="image_logo"><img src="~/Assets/Client/images/logoxshop.PNG"></div>
+                    <h4>DỊCH VỤ KHÁCH HÀNG</h4>
+                    <p>
+                        Hướng dẫn đặt hàng
+                    </p>
+                    <p>Chính sách đổi trả và bảo hành</p>
+                    <p>Chính sách bảo mật</p>
+                    <p>Chính sách khách hàng thân thiết</p>
+                </div>
+                <div class="col-md-2 amet-sed" data-aos="fade-right" data-aos-delay="300">
+                    <h4>THÔNG TIN</h4>
+                    <p>Tuyển dụng</p>
+                    <p>Hệ thống cửa hàng</p>
+                    <p>Liên hệ hợp tác</p>
+                    <p>Q&A</p>
+
+                    <div class="email-box">
+                        <i class="fas fa-envelope"></i>
+                        <input class="tbox" type="email" name="" value="" placeholder="Enter your email">
+                        <button class="btn" type="button" name="button">Subscribe</button>
+                    </div>
+                </div>
+
+                <div class="col-md-3 amet-sed" data-aos="fade-right" data-aos-delay="400">
+                    <h4>LIÊN HỆ</h4>
+                    <ul class="nav-bottom">
+                        <li><a href="#"><span>Hotline:</span>097 507 1208</a></li>
+                        <li><a href="#"><span>Store 1: </span>57 Quan Hoa, Cầu Giấy, Hà Nội</a></li>
+                        <li><a href="#"><span>Store 2: </span>29 Trần Đại Nghĩa, Hai Bà Trưng, Hà Nội</a></li>
+                        <li><a href="#"><span>Store 3: </span>61 Trần Phú, Hà Đông, Hà Nội</a></li>
+                    </ul>
+
+
+                </div>
+                <div class="col-md-4 amet-sed" data-aos="fade-right" data-aos-delay="400">
+                    <h4>XShop trên Facebook</h4>
+                    <div class="image-footer">
+
+                        <div class="image-logo-footer">
+                            <img src="~/Assets/Client/images/logo-footer.jpg">
+                        </div>
+                        <div class="like">
+                            <div class="like1">
+                                <a href="https://www.facebook.com/XSH0P/" style="color: #23232c;"><i class="fa-brands fa-facebook-square"></i> Thích trang</a>
+                            </div>
+                            <div class="like1" style="margin-left: 150px;">
+                                <a href="https://www.facebook.com/XSH0P/" style="color: #23232c;"><i class="fa-solid fa-share"></i> Chia sẻ</a>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+
+    </div>
+
+    @RenderSection("jsFooter", required: false)
+    <script>
+        $(document).ready(function () {
+            //click to scroll top
+            $('.move-up span').click(function () {
+                $('html,body').animate({
+                    scrollTop: 0
+                }, 2000)
+            })
+            //Aos chuyển động của ảnh
+            AOS.init();
+        });
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+</body>
+
+</html>

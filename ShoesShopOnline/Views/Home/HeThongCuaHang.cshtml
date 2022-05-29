@@ -1,0 +1,306 @@
+﻿
+@{
+    ViewBag.Title = "HeThongCuaHang";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+    .shop-system {
+        display: flex;
+        width: 100%;
+        border-bottom: 1px solid #000;
+        padding-bottom: 27px;
+        margin-top: 110px;
+    }
+
+    .google-map {
+        width: 65%;
+    }
+
+    iframe {
+        width: 100%;
+        height: 450px;
+    }
+
+    .shop-system-title {
+        margin-left: 30px;
+    }
+
+        .shop-system-title h3 {
+            color: #23232c;
+            font-size: 45px;
+            line-height: 1.2;
+            font-weight: 500;
+            display: block;
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 60px;
+        }
+
+    .elementor-widget-container ul {
+        list-style-type: none;
+        line-height: 1.5;
+        font-size: 15px;
+        font-family: -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif;
+        padding: 0px 10px;
+    }
+
+        .elementor-widget-container ul li {
+            padding-bottom: 10px;
+        }
+
+    .elementor-icon-list-icon {
+        margin-right: 6px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .elementor-icon-list-title {
+        color: #7C7C80;
+    }
+
+    .item-shop {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-top: 40px;
+    }
+
+    .item1-shop {
+        width: calc(33.33% - 20px);
+    }
+
+        .item1-shop img {
+            width: 95%;
+        }
+
+        .item1-shop p {
+            color: #7A7A7A;
+            font-size: 15px;
+            margin-top: 15px;
+            text-align: center;
+            width: 90%;
+        }
+
+    .story {
+        display: flex;
+        margin-top: 40px;
+    }
+
+    .story-left {
+        width: 65%;
+        overflow: hidden;
+    }
+
+        .story-left img {
+            object-fit: cover;
+            width: 93%;
+            height: 400px;
+        }
+
+    .story-content {
+        width: 35%;
+    }
+
+        .story-content h3 {
+            margin-top: 0px;
+            color: #f12184;
+            text-align: center;
+            font-family: "Roboto Slab", Sans-serif;
+            font-size: 40px;
+            font-weight: 400;
+            text-transform: capitalize;
+        }
+
+    .elementor-icon-shop {
+        text-align: center;
+        height: 30px;
+    }
+
+        .elementor-icon-shop i {
+            text-align: center;
+            color: #00c0dd;
+            font-size: 21px;
+        }
+
+    .story-content .paragraph {
+        color: #666666;
+        margin-left: 30px;
+        margin-top: 30px;
+        line-height: 2.5rem;
+        font-size: 16px;
+        font-family: "Roboto Slab", Sans-serif;
+        font-weight: 400;
+    }
+
+    .time-shop {
+        display: flex;
+        justify-content: center;
+        margin-top: 90px;
+    }
+
+        .time-shop .item3 {
+            margin-left: 65px;
+        }
+
+            .time-shop .item3 img {
+                width: 50px;
+            }
+
+        .time-shop .item3-content h3 {
+            margin: 30px 0px;
+            font-weight: 700;
+        }
+
+        .time-shop .item3-content p {
+            margin-left: 30px;
+        }
+
+        .time-shop .item3 i {
+            font-size: 50px;
+        }
+
+    .image-footer {
+        background: url(images/product.jpg) no-repeat center center;
+        background-size: cover;
+        justify-content: center;
+        align-items: center;
+        height: 230px;
+    }
+
+    .image-logo-footer img {
+        border: 2px solid #fff;
+        box-shadow: 0 1px 6px rgb(0 0 0 / 50%);
+        margin: 6px;
+    }
+
+    .image-footer .like {
+        position: relative;
+        top: 110px;
+        display: flex;
+        margin-left: 20px;
+    }
+
+        .image-footer .like .like1 {
+            background: white;
+            padding: 0px 8px;
+            font-size: 13px;
+            border-radius: 3px;
+            color: #23232c;
+        }
+</style>
+<div class="shop-system">
+    <div class="google-map">
+        <iframe src="https://www.google.com/maps/d/embed?mid=1SbN6ahfx-uWQgDPKmQCm6uD1UOvanulP&ll=20.975081594591092%2C105.87299107096004&z=13"></iframe>
+    </div>
+    <div class="shop-system-title">
+        <h3>Hệ thống cửa hàng XShop </h3>
+        <div class="elementor-widget-container">
+            <ul class="elementor-icon-list-item">
+                <li style=" border-bottom: 1px solid #ddd;">
+                    <span class="elementor-icon-list-icon"><i class="fa-solid fa-check"></i></span>
+                    <span class="elementor-icon-list-title">57 Quan Hoa, Cầu Giấy, Hà Nội</span>
+                </li>
+                <li style=" border-bottom: 1px solid #ddd;margin-top: 10px;">
+                    <span class="elementor-icon-list-icon"><i class="fa-solid fa-check"></i></span>
+                    <span class="elementor-icon-list-title">
+                        29 Trần Đại Nghĩa, Hai Bà Trưng
+                    </span>
+                </li>
+                <li style="margin-top: 10px;">
+                    <span class="elementor-icon-list-icon"><i class="fa-solid fa-check"></i></span>
+                    <span class="elementor-icon-list-title">61 Trần Phú, Hà Đông</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<div class="container">
+    <div class="elementor-widget-wrap-shop">
+        <div class="item-shop">
+            <div class="item1-shop">
+                <img src="~/Assets/Client/images/21.jpeg">
+                <p>Gửi xe miễn phí, dễ dàng</p>
+            </div>
+            <div class="item1-shop">
+                <img src="~/Assets/Client/images/20.jpeg">
+                <p>Thanh toán dễ dàng tiền mặt, quẹt thẻ và chuyển khoản</p>
+            </div>
+            <div class="item1-shop">
+                <img src="~/Assets/Client/images/22.jpeg">
+                <p>Cửa hàng khang trang, rộng rãi, đa dạng mẫu mã</p>
+            </div>
+        </div>
+        <div class="content">
+            <div class="story">
+                <div id="myCarousel" class="carousel slide story-left" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="~/Assets/Client/images/20.jpeg" alt="Los Angeles" style="width:100%;">
+                        </div>
+
+                        <div class="item">
+                            <img src="~/Assets/Client/images/21.jpeg" alt="Chicago" style="width:100%;">
+                        </div>
+
+                        <div class="item">
+                            <img src="~/Assets/Client/images/22.jpeg" alt="New york" style="width:100%;">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="story-content">
+                    <h3>Câu chuyện</h3>
+                    <div class="elementor-icon-shop">
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                    </div>
+                    <div class="paragraph">
+                        <p>Với mong muốn mang đến cho khách hàng sự trải nghiệm tốt nhất khi mua sắm các sản phẩm thời trang, trong thời gian qua XSHOP không ngừng mở rộng các cửa hàng khắp Hà Nội</p>
+                        <p>Năm 2019, mục tiêu của XSHOP sẽ tiếp tục mở thêm nhiều hệ thống cửa hàng nữa để đem đến cho khách hàng những sản phẩm thời trang phù hợp với nhu cầu, giá cả tốt nhất và dịch vụ hoàn hảo</p>
+                        <p>Mời bạn xem một số hình ảnh sinh động tại cửa hàng XSHOP.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="time-shop">
+
+                <div class="item2" style="width: 30%;">
+                    <div class="item3">
+                        <img src="~/Assets/Client/images/clock.PNG" />>
+                    </div>
+                    <div class="item3-content">
+                        <h3>Thời gian làm việc</h3>
+                        <p>9:00 AM - 22.00 PM</p>
+                        <p>Thứ 2 - Chủ Nhật</p>
+                    </div>
+                </div>
+                <div class="item2">
+                    <div class="item3">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div class="item3-content">
+                        <h3 style="text-align: center;"> Liên Hệ</h3>
+                        <p>Phone: 097 567 1080</p>
+                        <p>Email: contact@giayxshop.vn</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+

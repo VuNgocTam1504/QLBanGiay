@@ -1,0 +1,84 @@
+﻿@model ShoesShopOnline.Models.TinTuc
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TinTuc</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TaiKhoanQuanTri.TenDangNhap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaiKhoanQuanTri.TenDangNhap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenTin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenTin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </dt>
+
+        <td>
+            @Html.DisplayFor(model => model.NoiDung)
+        </td>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaTin }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<div class="col-12 col-cl-10">
+    <div class="card card-body bg-white border-light shadow-sm mb-4">
+        <h2 class="h5 mb-4">Chi tiết tin tức</h2>
+        <form>
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <div>
+                        <label for="category">Tên tin tức</label>
+                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.TenTin)" readonly disabled>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div>
+                        <label for="nameProduct">Nội dung</label>
+                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.NgayDang)" readonly disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <div>
+                        <label for="dateBuy">Ngày đặt</label>
+                        @Html.DisplayNameFor(model => model.NoiDung)
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>

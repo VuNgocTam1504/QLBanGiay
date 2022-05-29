@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ShoesShopOnline.Models.KhuyenMaiSP>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    a{color:#fff;}
+    .delete-sale a:last-child {
+      background: #FF6347;color:#fff;border:none;padding:5px 10px;
+    }
+</style>
+<h2>Danh sách khuyến mại</h2>
+
+<p>
+
+    <button style="background-color: #428BCA; border-radius: 8px; border: none; margin: 10px 0px; padding: 7px 9px;">      @Html.ActionLink("Thêm mới", "Create")</button>
+  
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaKM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhanTramKM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayBatDau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayKetThuc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.MaKM)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PhanTramKM)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NgayBatDau)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NgayKetThuc)
+    </td>
+    <td class="delete-sale">
+        <a class="ThemMoi" href="~/Admin/KhuyenMaiSPs/Edit/@item.MaKM" style="background:#DAA520;color:#fff;border:none">Sửa</a>|
+        <a class="ThemMoi" href="~/Admin/KhuyenMaiSPs/Details/@item.MaKM" style="  background: #2f4f4f;color:#FFF;border:none">Chi tiết</a>|
+  
+
+        <a> @Html.ActionLink("Xóa", "Delete", new { id = item.MaKM })</a>
+
+    </td>
+</tr>
+}
+
+</table>
